@@ -1,0 +1,11 @@
+{
+  "name": "tdd-starter-kit",
+  "version": "0.0.1",
+  "description": "TDD Starter Kit for future repositories",
+  "main": "main.js",
+  "scripts": {
+    "start": "gulp run serve"
+  },
+  "author": "ppseprus",
+  "license": "MIT"
+}
