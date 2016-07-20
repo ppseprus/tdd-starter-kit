@@ -4,13 +4,14 @@
   "description": "TDD Starter Kit for future repositories",
   "main": "main.js",
   "scripts": {
-    "start": "gulp run serve"
+    "start": "gulp serve"
   },
   "author": "ppseprus",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.4.0",
+    "gulp-livereload": "^3.8.1",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.0",
     "karma-jasmine": "^1.0.2",
