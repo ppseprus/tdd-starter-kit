@@ -8,29 +8,6 @@ var _ = require('lodash'),
 	karma = require('karma');
 
 
-// NOTE: paths should be moved to another file
-var paths = {
-	karmaconf: '/karma.conf.js',
-	js: {
-		src: ['./src/**/*.js', '!./src/**/*.spec.js'],
-		dest: './build/**/*.js',
-		dest_dir: './build',
-	},
-	jasmine: {
-		src: './src/**/*.js'
-	},
-	images: {
-		src: './src/**/*.{jpg,png,gif}',
-		dest_dir: './build'
-	},
-	html: { 
-		src: './src/**/*.html',
-		dest: './build/**/*.html',
-		dest_dir: './build'
-	}
-};
-
-
 // NOTE: basic functions should be moved to another file
 function fileExists(file) {
 	try {
@@ -42,36 +19,66 @@ function fileExists(file) {
 }
 
 
+const LIVERELOAD_PORT = 9000;
+const TEST_FILE_SUFFIX = '.spec';
+
+
+// NOTE: paths should be moved to another file
+var paths = {
+	karmaconf: '/karma.conf.js',
+	static: { 
+		src: './src/**/*.{html,css,json}',
+		dest_dir: './build'
+	},
+	images: {
+		src: './src/**/*.{jpg,png,gif}',
+		dest_dir: './build'
+	},
+	js: {
+		src: ['./src/**/*.js', `!./src/**/*${TEST_FILE_SUFFIX}.js`],
+		dest: './build/**/*.js',
+		dest_dir: './build',
+	},
+	jasmine: {
+		src: './src/**/*.js'
+	}
+};
+
+
 // lsit of files when a single test is run
 var testCase = [];
 
-// livereload server
-var server;
+
+// livereload
 gulp.task('livereload', function(callback) {
-	server = livereload();
+	livereload.listen(LIVERELOAD_PORT);
 	callback();
 });
 
 
 // BUILD
 
+gulp.task('copy:static', function() {
+	return gulp.src(paths.static.src)
+		.pipe(changed(paths.static.dest_dir))
+		.pipe(gulp.dest(paths.static.dest_dir))
+		.pipe(livereload());
+});
+
 gulp.task('copy:images', function() {
 	return gulp.src(paths.images.src)
 		.pipe(changed(paths.images.dest_dir))
-		//.pipe(imagemin())
-		.pipe(gulp.dest(paths.images.dest_dir));
-});
-
-gulp.task('copy:html', function() {
-	return gulp.src(paths.html.src)
-		.pipe(changed(paths.html.dest_dir))
-		.pipe(gulp.dest(paths.html.dest_dir));
+		// image conversions comes here
+		.pipe(gulp.dest(paths.images.dest_dir))
+		.pipe(livereload());
 });
 
 gulp.task('build:js', function() {
 	return gulp.src(paths.js.src)
 		.pipe(changed(paths.js.dest_dir, { extension: '.js' }))
-		.pipe(gulp.dest(paths.js.dest_dir));
+		// compile, minification and/or uglification comes here
+		.pipe(gulp.dest(paths.js.dest_dir))
+		.pipe(livereload());
 });
 
 
@@ -103,8 +110,8 @@ gulp.task('watch:js', function() {
 });
 
 gulp.task('watch:static', function(callback) {
+	gulp.watch(paths.static.src, ['copy:static']);
 	gulp.watch(paths.images.src, ['copy:images']);
-	gulp.watch(paths.html.src, ['copy:html']);
 	callback();
 });
 
@@ -139,11 +146,11 @@ gulp.task('test', function(callback) {
 // DEFAULTS
 
 gulp.task('build', function(callback) {
-	sequence('copy:images', 'copy:html', 'build:js', callback);
+	sequence('copy:static', 'copy:images', 'build:js', callback);
 });
 
 gulp.task('serve', function(callback) {
-	sequence('build', 'livereload', 'watch:js', 'watch:static', callback);
+	sequence('build', 'livereload', 'watch:static', 'watch:js', callback);
 });
 
 gulp.task('default', ['serve']);
