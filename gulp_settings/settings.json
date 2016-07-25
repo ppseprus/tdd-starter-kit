@@ -1,0 +1,21 @@
+{
+	"paths": {
+		"destination": "./build",
+		"static": "./src/**/*.{html,css,json}",
+		"images": "./src/**/*.{jpg,png,gif}",
+		"js": ["./src/**/*.js", "!./src/**/*spec.js"],
+		"jasmine": "./src/**/*.js"
+	},
+	"connect": {
+		"livereload": true,
+		"port": 9000,
+		"root": "build"
+	},
+	"karma": {
+		"karmaconf": "karma.conf.js",
+		"autowatch": true,
+		"singlerun": true,
+		"port": 9876,
+		"colors": true
+	}
+}
