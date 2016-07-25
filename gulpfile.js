@@ -3,7 +3,7 @@ var _ = require('lodash'),
 	gulp = require('gulp'),
 	watch = require('gulp-watch'),
 	changed = require('gulp-changed'),
-	livereload = require('gulp-livereload'),
+	connect = require('gulp-connect'),
 	sequence = require('run-sequence'),
 	karma = require('karma');
 
@@ -19,7 +19,8 @@ function fileExists(file) {
 }
 
 
-const LIVERELOAD_PORT = 9000;
+const WEBSERVER_PORT = 9000;
+const WEBSERVER_ROOT = 'build';
 const TEST_FILE_SUFFIX = '.spec';
 
 
@@ -51,7 +52,11 @@ var testCase = [];
 
 // livereload
 gulp.task('livereload', function(callback) {
-	livereload.listen(LIVERELOAD_PORT);
+	connect.server({
+		port: WEBSERVER_PORT,
+		root: WEBSERVER_ROOT,
+		livereload: true
+	});
 	callback();
 });
 
@@ -62,7 +67,7 @@ gulp.task('copy:static', function() {
 	return gulp.src(paths.static.src)
 		.pipe(changed(paths.static.dest_dir))
 		.pipe(gulp.dest(paths.static.dest_dir))
-		.pipe(livereload());
+		.pipe(connect.reload());
 });
 
 gulp.task('copy:images', function() {
@@ -70,7 +75,7 @@ gulp.task('copy:images', function() {
 		.pipe(changed(paths.images.dest_dir))
 		// image conversions comes here
 		.pipe(gulp.dest(paths.images.dest_dir))
-		.pipe(livereload());
+		.pipe(connect.reload());
 });
 
 gulp.task('build:js', function() {
@@ -78,7 +83,7 @@ gulp.task('build:js', function() {
 		.pipe(changed(paths.js.dest_dir, { extension: '.js' }))
 		// compile, minification and/or uglification comes here
 		.pipe(gulp.dest(paths.js.dest_dir))
-		.pipe(livereload());
+		.pipe(connect.reload());
 });
 
 
