@@ -9,7 +9,7 @@ module.exports = function(context) {
 
 	gulp.task('test:all', function(callback) {
 		new karma.Server({
-			configFile: __dirname + '/../../' + context.configuration.karma.karmaconf,
+			configFile: __dirname + context.configuration.karma.karmaconf,
 			autoWatch: context.configuration.karma.autowatch,
 			singleRun: context.configuration.karma.singlerun,
 			port: context.configuration.karma.port,

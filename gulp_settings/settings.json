@@ -12,7 +12,7 @@
 		"root": "build"
 	},
 	"karma": {
-		"karmaconf": "karma.conf.js",
+		"karmaconf": "/../../karma.conf.js",
 		"autowatch": true,
 		"singlerun": true,
 		"port": 9876,

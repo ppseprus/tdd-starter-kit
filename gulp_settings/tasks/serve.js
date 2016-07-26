@@ -65,7 +65,7 @@ module.exports = function(context) {
 	gulp.task('test:single', function(callback) {
 		if (testCase.length === 2) {
 			var singleFileConfig = {
-				configFile: __dirname + '/../../' + context.configuration.karma.karmaconf,
+				configFile: __dirname + context.configuration.karma.karmaconf,
 				autoWatch: context.configuration.karma.autowatch,
 				singleRun: context.configuration.karma.singlerun,
 				port: context.configuration.karma.port,
