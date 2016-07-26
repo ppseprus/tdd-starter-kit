@@ -16,7 +16,7 @@ module.exports = function(context) {
 	gulp.task('copy:images', function() {
 		return gulp.src(context.configuration.paths.images)
 			.pipe(changed(context.configuration.paths.destination))
-			// image conversions comes here
+			// image conversions come here
 			.pipe(gulp.dest(context.configuration.paths.destination))
 			.pipe(connect.reload());
 	});
@@ -24,7 +24,7 @@ module.exports = function(context) {
 	gulp.task('build:js', function() {
 		return gulp.src(context.configuration.paths.js)
 			.pipe(changed(context.configuration.paths.destination, { extension: '.js' }))
-			// compile, minification and/or uglification comes here
+			// compile, minification and/or uglification come here
 			.pipe(gulp.dest(context.configuration.paths.destination))
 			.pipe(connect.reload());
 	});
