@@ -3,11 +3,11 @@
 		"destination": "./build",
 		"static": "./src/**/*.{html,css,json}",
 		"images": "./src/**/*.{jpg,png,gif}",
-		"js": ["./src/**/*.js", "!./src/**/*spec.js"],
-		"jasmine": "./src/**/*.js"
+		"javascript": ["./src/**/*.js", "!./src/**/*spec.js"]
 	},
 	"karma": {
 		"karmaconf": "/../../karma.conf.js",
+		"include": "./src/**/*.js",
 		"autowatch": true,
 		"singlerun": true,
 		"port": 9876,

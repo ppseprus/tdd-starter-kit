@@ -55,10 +55,10 @@ module.exports = function(context) {
 		callback();
 	});
 
-	gulp.task('watch:js', function() {
-		return watch(context.configuration.paths.jasmine, function(vinyl) {
+	gulp.task('watch:javascript', function() {
+		return watch(context.configuration.karma.include, function(vinyl) {
 			testCase = createTestCase(vinyl);
-			sequence('build:js', 'test:single');
+			sequence('build:javascript', 'test:single');
 		});
 	});
 
@@ -79,7 +79,7 @@ module.exports = function(context) {
 	});
 
 	gulp.task('serve', function(callback) {
-		sequence('build', 'webserver', 'watch:static', 'watch:js', callback);
+		sequence('build', 'webserver', 'watch:static', 'watch:javascript', callback);
 	});
 
 };

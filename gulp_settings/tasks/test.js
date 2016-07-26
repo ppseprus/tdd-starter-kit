@@ -14,7 +14,7 @@ module.exports = function(context) {
 			singleRun: context.configuration.karma.singlerun,
 			port: context.configuration.karma.port,
 			colors: context.configuration.karma.colors,
-			files: context.configuration.paths.js
+			files: context.configuration.paths.javascript
 		}).start();
 		callback();
 	});

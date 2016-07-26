@@ -21,8 +21,8 @@ module.exports = function(context) {
 			.pipe(connect.reload());
 	});
 
-	gulp.task('build:js', function() {
-		return gulp.src(context.configuration.paths.js)
+	gulp.task('build:javascript', function() {
+		return gulp.src(context.configuration.paths.javascript)
 			.pipe(changed(context.configuration.paths.destination, { extension: '.js' }))
 			// compile, minification and/or uglification come here
 			.pipe(gulp.dest(context.configuration.paths.destination))
@@ -30,7 +30,7 @@ module.exports = function(context) {
 	});
 
 	gulp.task('build', function(callback) {
-		sequence('copy:static', 'copy:images', 'build:js', callback);
+		sequence('copy:static', 'copy:images', 'build:javascript', callback);
 	});
 
 };
