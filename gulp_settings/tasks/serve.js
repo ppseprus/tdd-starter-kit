@@ -42,9 +42,9 @@ module.exports = function(context) {
 
 	gulp.task('webserver', function(callback) {
 		connect.server({
-			port: context.configuration.connect.port,
-			root: context.configuration.connect.root,
-			livereload: context.configuration.connect.livereload
+			port: context.configuration.webserver.port,
+			root: context.configuration.webserver.root,
+			livereload: context.configuration.webserver.livereload
 		});
 		callback();
 	});
