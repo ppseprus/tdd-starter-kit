@@ -32,7 +32,9 @@ git merge addition/<your-selected-branch> master
 And finally, create your _**dev**_ branch
 ```
 git checkout -b dev
+gulp serve
 ```
+
 Code!
 
-If using `gulp serve`, file changes _(add, change, delete)_ will be automatically handled: the _webserver_ will be reloaded and the unit tests will be ran again.
+Note: While using `gulp serve`, file changes like _add_, _change_ and _delete_ will be handled automatically. The _webserver_ will be reloaded and the unit tests will be ran again.
