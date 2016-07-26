@@ -2,7 +2,7 @@
   "name": "tdd-starter-kit",
   "version": "0.0.2",
   "description": "TDD Starter Kit for future repositories",
-  "main": "main.js",
+  "main": "build/index.html",
   "scripts": {
     "start": "gulp serve"
   },
