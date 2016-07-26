@@ -14,11 +14,7 @@ module.exports = function(context) {
 	var testCase = [];
 
 	gulp.task('webserver', function(callback) {
-		connect.server({
-			port: context.configuration.webserver.port,
-			root: context.configuration.webserver.root,
-			livereload: context.configuration.webserver.livereload
-		});
+		connect.server(context.configuration.webserver);
 		callback();
 	});
 
