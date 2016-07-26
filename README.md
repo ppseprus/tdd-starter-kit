@@ -29,7 +29,7 @@ Merge the branch you need to _**master**_
 ```
 git merge addition/<your-selected-branch> master
 ```
-And finally, create your _**dev**_ branch
+And finally, create your _**dev**_ branch and run the _serve_ task
 ```
 git checkout -b dev
 gulp serve
