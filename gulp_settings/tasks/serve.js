@@ -2,9 +2,9 @@ module.exports = function(context) {
 	'use strict';
 
 	require('./build')(context);
+	var util = require('../util');
 
 	var _ = require('lodash'),
-		fs = require('fs'),
 		gulp = require('gulp'),
 		watch = require('gulp-watch'),
 		connect = context.connect,
@@ -12,33 +12,6 @@ module.exports = function(context) {
 		karma = require('karma');
 
 	var testCase = [];
-
-	function fileExists(file) {
-		try {
-			fs.statSync(file).isFile();
-			return true;
-		} catch (e) {
-			return false;
-		}
-	}
-
-	function createTestCase(vinyl) {
-		var files = [];
-		if (!_.isUndefined(vinyl.path) && _.includes(['add', 'change'], vinyl.event)) {
-			var correspondingFile;
-			if (/\.spec/g.test(vinyl.path)) {
-				correspondingFile = vinyl.path.replace('.spec','');
-			} else {
-				correspondingFile = vinyl.path.replace('.js','.spec.js');
-			}
-
-			files.push(vinyl.path);
-			if (fileExists(correspondingFile)) {
-				files.push(correspondingFile);
-			}
-		}
-		return files;
-	}
 
 	gulp.task('webserver', function(callback) {
 		connect.server({
@@ -57,7 +30,7 @@ module.exports = function(context) {
 
 	gulp.task('watch:javascript', function() {
 		return watch(context.configuration.karma.include, function(vinyl) {
-			testCase = createTestCase(vinyl);
+			testCase = util.createTestCase(vinyl);
 			sequence('build:javascript', 'test:single');
 		});
 	});
