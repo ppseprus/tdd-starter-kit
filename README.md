@@ -35,4 +35,4 @@ git checkout -b dev
 ```
 Code!
 
-Note: if using `gulp serve`, file changes _(addition, change, deletion)_ will be automatically handled: the _webserver_ will be reloaded and the unit tests will be ran again.
+Note: if using `gulp serve`, file changes _(add, change, delete)_ will be automatically handled: the _webserver_ will be reloaded and the unit tests will be ran again.
