@@ -1,21 +1,21 @@
 {
-	"paths": {
-		"destination": "./build",
-		"static": "./src/**/*.{html,css,json}",
-		"images": "./src/**/*.{jpg,png,gif}",
-		"javascript": ["./src/**/*.js", "!./src/**/*spec.js"]
-	},
-	"karma": {
-		"karmaconf": "/../../karma.conf.js",
-		"include": "./src/**/*.js",
-		"autowatch": true,
-		"singlerun": true,
-		"port": 9876,
-		"colors": true
-	},
-	"webserver": {
-		"livereload": true,
-		"port": 9000,
-		"root": "build"
-	}
+  "paths": {
+    "destination": "./build",
+    "static": "./src/**/*.{html,css,json}",
+    "images": "./src/**/*.{jpg,png,gif}",
+    "javascript": ["./src/**/*.js", "!./src/**/*spec.js"]
+  },
+  "karma": {
+    "karmaconf": "/../../karma.conf.js",
+    "include": "./src/**/*.js",
+    "autowatch": true,
+    "singlerun": true,
+    "port": 9876,
+    "colors": true
+  },
+  "webserver": {
+    "livereload": true,
+    "port": 9000,
+    "root": "build"
+  }
 }
